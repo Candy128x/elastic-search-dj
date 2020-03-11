@@ -5,6 +5,8 @@
 ## pip3 install *packages
 - => pip3 install django
 - => pip3 install djangorestframework
+- => pip3 install django_elasticsearch_dsl
+- => pip3 install django_elasticsearch_dsl_drf
 
 ## install packages
 - => cd projdemo
