@@ -2,20 +2,18 @@
 
 ---
 ## Software Requirements
-- python : 3.5
-- django : 2.2.6
+- python : 3.6.9
+- django : 3.0.4
 
 
 ---
-## TestCaseReport_TestLoginUser.csv
+## Elasric Search Response
 	- file open in LibreOffice Calc
-<kbd><img src="/imgs-readme/screenshot-from-2019-10-20-22-54-00.png" alt="django_default-page_v1-1" title="django_default-page"></img></kbd>
+<kbd><img src="/imgs-readme/screenshot_from_2020-03-13_16-33-50.png" alt="django_default-page_v1-1" title="django_default-page"></img></kbd>
 
 
 ---
 ## Postman Collection Link
-- https://www.getpostman.com/collections/1b078e77e78bfb33876b
+	- elastic-search-dj
+	>https://www.getpostman.com/collections/381e57bbd3fcbd2404c4
 
----
-## Medium Article Link
-- https://medium.com/@sondagarashish/8235fedfc61

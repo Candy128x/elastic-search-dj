@@ -1,5 +1,6 @@
-from django_elasticsearch_dsl import (DocType, fields, Index, Text, Date)
-from customer.models.customer import (Customer)
+from elasticsearch_dsl import DocType, Index, Text, Date
+# from django_elasticsearch_dsl.documents import Document
+# from customer.models.customer import Customer
 
 '''
 customer_index = Index('customers')
