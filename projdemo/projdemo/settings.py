@@ -125,6 +125,7 @@ ELASTICSEARCH_DSL = {
     },
 }
 
+ELASTICSEARCH_SALT='q@123'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

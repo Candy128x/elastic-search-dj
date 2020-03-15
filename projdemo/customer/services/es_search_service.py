@@ -1,4 +1,3 @@
-# from .utils import BookPublishIndex
 from customer.es_documents.customer_document import CustomerIndex
 from elasticsearch.helpers import bulk
 from elasticsearch import Elasticsearch
