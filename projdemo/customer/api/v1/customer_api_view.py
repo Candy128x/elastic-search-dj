@@ -69,10 +69,11 @@ class CustomerDetailApiView(APIView):
         request_data.update({'timestamp': int(datetime.timestamp(datetime.now()))})
         print('---request_data---', request_data)
 
-        url = 'http://localhost:9200/first_index/customer/2/_source' 
-        r = requests.post(url) 
+        url = 'http://localhost:9200/customer-index-2/update-doc/' 
+        request_header = {'Content-type': 'application/json'}
+        r = requests.post(url, data=request_data, headers=request_header) 
         es_response = r.json()
-        print('---es_response---', es_response) 
+        print('---es_response---post---', es_response) 
 
 
         es_request_data = 0
@@ -82,11 +83,12 @@ class CustomerDetailApiView(APIView):
         # bulk(client=es, actions=(result2c))
 
 
+        '''
         url = 'http://localhost:9200/first_index/customer/2/_source' 
         r = requests.get(url) 
         es_response = r.json()
-        print('---es_response---', es_response) 
-
+        print('---es_response---get---', es_response) 
+        '''
 
         if serializer.is_valid():
             serializer.save()
