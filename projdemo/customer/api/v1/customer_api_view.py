@@ -1,15 +1,14 @@
 from customer.es_documents.customer_document import CustomerIndex
 from customer.models.customer import Customer
 from customer.serializers import CustomerSerializer
-from datetime import datetime
+
 from django.http import Http404
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.views import APIView
-import requests
+from utils.elastic_search.services.elastic_search_service import ElasticSearchService
 
 
 class CustomerListApiView(APIView):
@@ -42,53 +41,7 @@ class CustomerDetailApiView(APIView):
         customer_object = self.get_object(pk)
         serializer = CustomerSerializer(customer_object, data=request.data)
 
-        # CustomerIndex.init()
-        es = Elasticsearch()
-        # bulk(client=es, actions=(b.indexing() for b in Customer.objects.all().iterator()))
-        # result1 = (b.indexing() for b in Customer.objects.all().iterator())
-        # result2 = b
-        # print('---result1---', result2)
-
-        # for b in Customer.objects.all().iterator():
-        #     print('---b---', b)
-        #     print('---b.indexing()---', b.indexing())
-        
-        # print('---customer_object---', customer_object)
-        # print('---customer_object---', customer_object.indexing())
-
-        # obj = CustomerIndex(meta={'id': self.id}, name=self.name,
-        #                     email=self.email, contact_no=self.contact_no, extra=self.extra)
-        # obj = obj.to_dict(include_meta=True)
-
-        request_data = request.data
-        # request_data.update({'id': customer_object.id})
-        # request_data.pop('password')
-        request_data.update({'entity_type': 'customer'})
-        request_data.update({'entity_id': customer_object.id})
-        request_data.update({'created_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S')})
-        request_data.update({'timestamp': int(datetime.timestamp(datetime.now()))})
-        print('---request_data---', request_data)
-
-        url = 'http://localhost:9200/customer-index-2/update-doc/' 
-        request_header = {'Content-type': 'application/json'}
-        r = requests.post(url, data=request_data, headers=request_header) 
-        es_response = r.json()
-        print('---es_response---post---', es_response) 
-
-
-        es_request_data = 0
-        # print('---es_request_data---', es_request_data)
-        # result2b = CustomerIndex(meta={'id': 121}, **request_data)
-        # result2c = result2b.to_dict(include_meta=True)
-        # bulk(client=es, actions=(result2c))
-
-
-        '''
-        url = 'http://localhost:9200/first_index/customer/2/_source' 
-        r = requests.get(url) 
-        es_response = r.json()
-        print('---es_response---get---', es_response) 
-        '''
+        ElasticSearchService.store_customer_updation_query(request.data, 'customer', customer_object.id)
 
         if serializer.is_valid():
             serializer.save()
